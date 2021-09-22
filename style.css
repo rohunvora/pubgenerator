@@ -6,7 +6,7 @@ body {
 }
 
 body {
-  background: black;
+  background: white;
   font-family: 'Source Code Pro', monospace;
   font-weight: 400;
   overflow: hidden;
@@ -17,7 +17,7 @@ body {
 
 h1 {
   text-align: center;
-  color: white;
+  color: black;
 }
 
 #contain {
@@ -165,7 +165,7 @@ transition: 500ms;
 
 .word {
   bottom: 0;
-  color: #fff;
+  color: black;
   font-size: 2.5em;
   height: 2.5em;
   left: 0;
@@ -185,13 +185,11 @@ transition: 500ms;
 }
 
 .word .done {
-  color: #6f6;
+  color: rgb(34, 216, 80);
   transform: translateX(0) scale(1);
 }
 
 .overlay {
-  background-image: linear-gradient(transparent 0%, rgba(10, 16, 10, 0.5) 50%);
-  background-size: 1000px 2px;
   bottom: 0;
   content: '';
   left: 0;
@@ -221,7 +219,7 @@ transition: 500ms;
   font-weight: normal;
   font-size: 27px;
   position: relative;
-  color: #27ee48;
+  color: black;
   margin-top: 50px;
   background-color: transparent;
   text-decoration: none;
@@ -234,7 +232,9 @@ transition: 500ms;
   outline: 90px solid transparent !important;
   -webkit-filter: url("#filter");
   filter: url("#filter");
+  border: 2px #27ee48 solid;
 }
 .glitch:hover {
   color: white;
+  background-color: #27ee48;
 }
