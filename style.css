@@ -1,15 +1,26 @@
+@import url(https://fonts.googleapis.com/css?family=Source+Code+Pro:400);
+
+html,
 body {
-	background : #008080;
-  font-family: 'DM Mono', monospace;;
-  color: whitesmoke;
+  height: 100%;
 }
 
-h1 {
+body {
+  background: black;
+  font-family: 'Source Code Pro', monospace;
+  font-weight: 400;
+  overflow: hidden;
+  padding: 30px 0 0 30px;
   text-align: center;
 }
 
+
+h1 {
+  text-align: center;
+  color: white;
+}
+
 #contain {
-  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -23,13 +34,17 @@ h1 {
 
 .cover {
   display: inline-block;
-  height: 400px;
-	width: 400px;
+  height: 600px;
+	width: 600px;
 	margin: 15px;
 	border-radius: 8px;
 }
 
 @media screen and (max-width: 700px) {
+  #contain {
+    margin-right: 2rem;
+    margin-top: 2rem;
+  }
 	.container {
 		width : 100%;
 		position: relative;
@@ -39,8 +54,8 @@ h1 {
 	}
 	.cover {
 		display: block;
-		height: 400px;
-		width: 400px;
+		height: 300px;
+		width: 300px;
 		margin: 15px auto;
 	}
 }
@@ -131,7 +146,7 @@ margin-top: 2rem;
 margin-bottom: 2rem;
 background: #2D6BE2;
 border-radius: 20px;
-animation: hueRotation 7s linear infinite;
+animation: hueRotation 5s linear infinite;
 transition: 500ms;
 }
 
@@ -148,127 +163,78 @@ transition: 500ms;
   color: yellow;
 }
 
-/** Just to polish the product */
-.Loader {
-	position: fixed;
-	width: 100%;
-	height: 100%;
-	top: 0;
-	left: 0;
-	overflow: hidden;
-	transition: ease .1s;
-	z-index: 99;
+.word {
+  bottom: 0;
+  color: #fff;
+  font-size: 2.5em;
+  height: 2.5em;
+  left: 0;
+  line-height: 2.5em;
+  margin: auto;
+  right: 0;
+  position: absolute;
+  text-shadow: 0 0 10px rgba(50, 255, 50, 0.5), 0 0 5px rgba(100, 255, 100, 0.5);
+  top: 0;
+  bottom: 30%;
 }
 
-.Loader.hidden {
-	animation: fadeOutt 3s;
-	animation-fill-mode: forwards;
-	overflow-y: visible;
+.word span {
+  display: inline-block;
+  transform: translateX(100%) scale(0.9);
+  transition: transform 100ms;
 }
 
-@keyframes fadeOutt {
-	100% {
-		visibility: hidden;
-		opacity: 0;
-	}
+.word .done {
+  color: #6f6;
+  transform: translateX(0) scale(1);
 }
 
-/** The loader itself */
-.spinnerPairHolder {
-	display: grid;
-	position: absolute;
-	width: 400px;
-	height: 100px;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	z-index: 1;
-
-	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+.overlay {
+  background-image: linear-gradient(transparent 0%, rgba(10, 16, 10, 0.5) 50%);
+  background-size: 1000px 2px;
+  bottom: 0;
+  content: '';
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
 }
 
-.spinnerPairHolder .spinnerPair {
-	position: relative;
-	width: 100%;
-	height: 100%;
-	top: 0;
-	left: 0;
+.svg-filters {
+  position: absolute;
+  visibility: hidden;
+  width: 1px;
+  height: 1px; }
+
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
 }
 
-.spinnerPairHolder .spinnerPair .spinnerPairCercle {
-	position: absolute;
-	width: 25px;
-	height: 25px;
-	top: 0;
-	left: 50%;
-	border-radius: 999px;
-	transform: translateX(-50%);
-
-	animation: loaderBallsSpin 2s infinite ease-in-out;
+.glitch {
+  cursor: pointer;
+  display: inline-block;
+  font-family: 'Source Code Pro', monospace;
+  font-weight: normal;
+  font-size: 27px;
+  position: relative;
+  color: #27ee48;
+  margin-top: 50px;
+  background-color: transparent;
+  text-decoration: none;
+  -webkit-font-smoothing: antialiased;
+  user-select: none;
+  letter-spacing: 1px;
+  padding: 15px 20px;
+  Transition: background-color 0.1s ease-out;
+  transform: translateZ(0);
+  outline: 90px solid transparent !important;
+  -webkit-filter: url("#filter");
+  filter: url("#filter");
 }
-
-/** Ball 1 */
-.spinnerPairHolder .spinnerPair .spinnerPairCercle:nth-child(1) {
-	background-image: linear-gradient(to top right, #a11562 15%, #fa2b51);
-}
-
-.spinnerPairHolder .spinnerPair:nth-child(1) .spinnerPairCercle:nth-child(1) {
-	animation-delay: 0s;
-}
-.spinnerPairHolder .spinnerPair:nth-child(2) .spinnerPairCercle:nth-child(1) {
-	animation-delay: 0.3s;
-}
-.spinnerPairHolder .spinnerPair:nth-child(3) .spinnerPairCercle:nth-child(1) {
-	animation-delay: 0.6s;
-}
-.spinnerPairHolder .spinnerPair:nth-child(4) .spinnerPairCercle:nth-child(1) {
-	animation-delay: 0.9s;
-}
-.spinnerPairHolder .spinnerPair:nth-child(5) .spinnerPairCercle:nth-child(1) {
-	animation-delay: 1.2s;
-}
-
-/** Ball 2 */
-.spinnerPairHolder .spinnerPair .spinnerPairCercle:nth-child(2) {
-	background-image: linear-gradient(to top right, #0d5a7e 15%, #0ccee7);
-}
-
-.spinnerPairHolder .spinnerPair:nth-child(1) .spinnerPairCercle:nth-child(2) {
-	animation-delay: 1s;
-}
-.spinnerPairHolder .spinnerPair:nth-child(2) .spinnerPairCercle:nth-child(2) {
-	animation-delay: 1.3s;
-}
-.spinnerPairHolder .spinnerPair:nth-child(3) .spinnerPairCercle:nth-child(2) {
-	animation-delay: 1.6s;
-}
-.spinnerPairHolder .spinnerPair:nth-child(4) .spinnerPairCercle:nth-child(2) {
-	animation-delay: 1.9s;
-}
-.spinnerPairHolder .spinnerPair:nth-child(5) .spinnerPairCercle:nth-child(2) {
-	animation-delay: 2.2s;
-}
-
-@keyframes loaderBallsSpin {
-	0% {
-		top: 0%;
-		z-index: 2;
-	}
-
-	25% {
-		transform: translateX(-50%) scale(1.2, 1.2);
-	}
-
-	50% {
-		top: calc(100% - 25px);
-	}
-
-	75% {
-		transform: translateX(-50%) scale(0.8, 0.8);
-	}
-
-	100% {
-		top: 0%;
-		z-index: 1;
-	}
+.glitch:hover {
+  color: white;
 }

@@ -1,6 +1,5 @@
 setTimeout(function loadIt () {
-
-let imageArray = ['11.png', '13.png', '18.png', '25.png']
+  let imageArray = ["0.png", "1.png", "2.png", "3.png", "4.png", "5.png", "6.png", "7.png", "8.png", "9.png", "10.png", "11.png", "12.png", "13.png", "14.png", "15.png", "16.png", "17.png", "18.png", "19.png", "20.png", "21.png", "22.png", "23.png", "24.png", "25.png", "26.png", "27.png", "28.png", "29.png", "30.png", "31.png", "32.png", "33.png", "34.png", "35.png", "36.png", "37.png", "38.png", "39.png", "40.png", "41.png", "42.png", "43.png", "44.png", "45.png", "46.png", "47.png", "48.png", "49.png", "50.png", "51.png", "52.png", "53.png", "54.png", "55.png", "56.png", "57.png", "58.png", "59.png", "60.png", "61.png", "62.png", "63.png", "63.png", "64.png", "65.png", "66.png", "67.png", "68.png", "69.png", "70.png", "71.png", "72.png", "73.png", "74.png", "75.png", "76.png", "77.png", "78.png", "79.png", "80.png", "81.png", "82.png", "83.png", "84.png", "85.png", "86.png", "87.png", "88.png", "89.png", "90.png", "91.png", "92.png", "93.png", "94.png", "95.png", "96.png", "97.png", "98.png", "99.png", "100.png"]
 let randMax = imageArray.length
 let randomIndex = Math.floor(Math.random() * randMax)
 
@@ -159,11 +158,104 @@ function atvImg() {
 
 atvImg();
 
-}, 3000)
+}, 1500)
 
 // This is NOT necessary for the loader animation to work
 
 window.addEventListener("load", function () {
   const Loader = document.querySelector(".Loader");
   Loader.classList.add("hidden");
+});
+
+function Ticker(elem) {
+  elem.lettering();
+  this.done = false;
+  this.cycleCount = 5;
+  this.cycleCurrent = 0;
+  this.chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%^&*()-_=+{}|[]\\;\':"<>?,./`~'.split('');
+  this.charsCount = this.chars.length;
+  this.letters = elem.find('span');
+  this.letterCount = this.letters.length;
+  this.letterCurrent = 0;
+
+  this.letters.each(function () {
+    var $this = $(this);
+    $this.attr('data-orig', $this.text());
+    $this.text('-');
+  });
+}
+
+Ticker.prototype.getChar = function () {
+  return this.chars[Math.floor(Math.random() * this.charsCount)];
+};
+
+Ticker.prototype.reset = function () {
+  this.done = false;
+  this.cycleCurrent = 0;
+  this.letterCurrent = 0;
+  this.letters.each(function () {
+    var $this = $(this);
+    $this.text($this.attr('data-orig'));
+    $this.removeClass('done');
+  });
+  this.loop();
+};
+
+Ticker.prototype.loop = function () {
+  var self = this;
+
+  this.letters.each(function (index, elem) {
+    var $elem = $(elem);
+    if (index >= self.letterCurrent) {
+      if ($elem.text() !== ' ') {
+        $elem.text(self.getChar());
+        $elem.css('opacity', Math.random());
+      }
+    }
+  });
+
+  if (this.cycleCurrent < this.cycleCount) {
+    this.cycleCurrent++;
+  } else if (this.letterCurrent < this.letterCount) {
+    var currLetter = this.letters.eq(this.letterCurrent);
+    this.cycleCurrent = 0;
+    currLetter.text(currLetter.attr('data-orig')).css('opacity', 1).addClass('done');
+    this.letterCurrent++;
+  } else {
+    this.done = true;
+  }
+
+  if (!this.done) {
+    requestAnimationFrame(function () {
+      self.loop();
+    });
+  } else {
+    setTimeout(function () {
+      self.reset();
+    }, 750);
+  }
+};
+
+$words = $('.word');
+
+$words.each(function () {
+  var $this = $(this),
+    ticker = new Ticker($this).reset();
+  $this.data('ticker', ticker);
+});
+
+var button = document.querySelectorAll('.glitch')[0];
+var turbVal = { val: 0.000001 };
+var turb = document.querySelectorAll('#filter feTurbulence')[0];
+var buttonTimeline = new TimelineLite({
+  paused: true, onUpdate: function () {
+    turb.setAttribute('baseFrequency', '0.00001 ' + turbVal.val);
+  }
+});
+
+buttonTimeline.to(turbVal, 0.15, { val: 0.6 });
+buttonTimeline.to(turbVal, 0.1, { val: 0.000001 });
+
+button.addEventListener('mouseenter', function () {
+  buttonTimeline.restart();
 });
